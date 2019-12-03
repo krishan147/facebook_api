@@ -33,11 +33,10 @@ def get_aspects(x):
 list_nouns = []
 list_nouns_first = []
 
-df = pd.read_csv('data/haircare_combined.csv', encoding='utf8')
+df = pd.read_csv('data/Pantene/pantene_combined.csv', encoding='utf8')
 list_reviews = df["post"].tolist()
 x = 0
 for review in list_reviews:
-    print (x)
     try:
         nouns = get_aspects(review)
         list_nouns.append(nouns)
@@ -54,4 +53,4 @@ for review in list_reviews:
 df["keywords"] = list_nouns
 df["keywords_first"] = list_nouns_first
 
-df.to_csv("data/haircare_combined_keywords.csv")
+df.to_csv("data/Pantene/pantene_combined_keywords.csv")

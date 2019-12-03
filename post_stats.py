@@ -24,16 +24,27 @@ def facebookStats(access_token, post_id):
     except KeyError:
         comments = 0
 
-    time.sleep(6)
+    time.sleep(3)
 
     print (likes,",",shares,",",comments)
 
     return likes, shares, comments
 
+#encoding='windows-1252'
 credentials_file = open("credentials.txt", "r")
 access_token = credentials_file.read()
-df = pd.read_csv('data/haircare_combined.csv',encoding='utf8')
+df = pd.read_csv('data/Pantene/pantene_combined_keywords.csv', encoding="utf8")
 list_post_id = df['post_id'].tolist()
+
+
+# filter1 = df["Filled"] != "Y"
+# filter2 = df["handle"] != "AldiUK"
+# df.where(filter1, inplace = True)
+# df.where(filter2, inplace = True)
+# df = df[(df["Filled"] != "Y") | (df["handle"] != "AldiUK") | (df["Filled"] != "Y") & (df["handle"] != "AldiUK")]
+
+# df = df.loc[df['Filled'] != "Y"]
+# df = df.loc[df['handle'] != "AldiUK"]
 
 list_likes = []
 list_shares = []
@@ -49,4 +60,4 @@ df['likes'] = list_likes
 df['shares'] = list_shares
 df['comments'] = list_comments
 
-df.to_csv("data/haircare_combined_stats.csv")
+df.to_csv("data/Pantene/pantene_combined_keywords_stats.csv")
