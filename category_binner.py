@@ -13,7 +13,7 @@ def matchMaker(product):
     'Recipe':['recipe'],
     'Food':['vitamin','soup','sweetclems','pudding','shreddies','kinder', 'yoghurt','bananas','apples','eggs','bread','walkers','chocolate','biscuits', 'chicken', 'crisps', 'sweets', 'cake', 'cadbury', 'pizza', 'walnut', 'snack', 'roast', 'potatoes', 'turkey', 'platter', 'cheese'],
     'Drink':['milk', 'coca-cola', 'pepsi', 'beer', 'wine', 'tea', 'coffee', 'drink', 'fizz', 'prosecco', 'Kopparberg'],
-    'Homecare':['bleach','febreze', 'fragrance'],
+    'Homecare':['bleach','febreze', 'fragrance', 'cif', 'cillit bang', 'dettol', 'domestos', 'fairy', 'flash', 'glade', 'sheen', 'muscle', 'pledge', 'vanish'],
     'Apps Games':[],
     'Baby':['maternity', 'toilet trainer', 'potty', 'nappies'],
     'Books':['dummies', 'harry potter', 'maths', 'science', 'history', 'potter'],
@@ -79,7 +79,7 @@ def matchMaker(product):
 
     return category
 
-df = pd.read_csv('data/haircare_combined.csv', encoding='UTF-8')
+df = pd.read_csv('data/ABBP haircare/haircare_combined.csv', encoding='UTF-8')
 
 list_products = df['post'].tolist()
 
@@ -95,4 +95,4 @@ print (len(list_categories))
 filled = [ x for x in list_categories if x is not '']
 print (len(filled))
 
-df.to_csv('data/haircare_combined_categories.csv')
+df.to_csv('data/ABBP haircare/haircare_combined_categories.csv')
