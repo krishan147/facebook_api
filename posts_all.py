@@ -4,16 +4,19 @@ import time
 import datetime
 import requests
 import json
+from time import mktime
 
 def facebook(handle, access_token):
 
     time.sleep(4)
-    url = "https://graph.facebook.com/v4.0/" + handle + "?fields=posts.limit(100).until(1574679326).since(1543017600)%7Bmessage%2Ccreated_time%7D&access_token=" + access_token
+
+    end_date = 1449964800 #1574679326
+    start_date = end_date - 31536000
+
+    url = "https://graph.facebook.com/v4.0/" + handle + "?fields=posts.limit(100).until("+str(end_date)+").since("+str(start_date)+")%7Bmessage%2Ccreated_time%7D&access_token=" + access_token
     # likes, shares, comments https://graph.facebook.com/v4.0/216311481960_10154125934861961?fields=shares,likes.summary(true).limit(0),comments.summary(true).limit(0)&access_token=
 
     data = requests.get(url).json()
-
-    print (data)
 
     if "posts" in str(data):
 
@@ -39,8 +42,10 @@ def facebook(handle, access_token):
             df = pd.DataFrame(data['posts']['data'])
             last_created_date = df['created_time'].min()
             data_posts = data["posts"]
+            last_created_date = datetime.datetime.strptime(last_created_date, '%Y-%m-%dT%H:%M:%S+0000')
+            last_created_date = mktime(last_created_date.timetuple())
 
-            while 'next' in data_posts["paging"] and last_created_date > '2017-09-21T00:00:00+0000':
+            while 'next' in data_posts["paging"] and last_created_date < end_date:
 
                 url_paging = data_posts["paging"]["next"]
                 data_paging = requests.get(url_paging).json()
@@ -61,7 +66,9 @@ def facebook(handle, access_token):
                 data_posts = data_paging
                 time.sleep(7)
 
-            if 'next' not in data["posts"]["paging"] or last_created_date > '2017-09-21T00:00:00+0000':
+            if 'next' not in data["posts"]["paging"] or last_created_date < end_date:
+
+                print ("next not in")
 
                 df = pd.DataFrame(data = {
                     'post_id':list_post_id,
@@ -87,7 +94,7 @@ access_token = credentials_file.read()
 with open("handles.txt", "r") as handles:
     for handle in handles:
         handle = handle.replace('\n', '')
-        print (handle)
-        df_main = facebook(handle, access_token)
 
+        df_main = facebook(handle, access_token)
         df_main.to_csv("data/"+handle+".csv")
+        time.sleep(10)

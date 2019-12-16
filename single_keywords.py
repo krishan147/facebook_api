@@ -26,7 +26,7 @@ def countKeywords(df):
 
     return df
 
-df = pd.read_csv("data/Pantene/pantene_combined_keywords.csv", encoding='utf8')
+df = pd.read_csv("data/shavecare/shavecare_combined_keywords.csv", encoding='utf8')
 df_main = countKeywords(df)
 
-df_main.to_csv("data/Pantene/pantene_combined_keywords_single.csv")
+df_main.to_csv("data/shavecare/shavecare_combined_keywords_single.csv")

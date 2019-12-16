@@ -7,5 +7,3 @@ df = df[df['post'].str.contains("pantene|aussie|herbal|shoulders|shampoo|conditi
 #df = df.a.str.contains(pattern)
 
 df.to_csv("data/haircare_combined_haironly.csv")
-
-

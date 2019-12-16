@@ -19,7 +19,6 @@ stop_words=["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", 
 """Load the pre-trained NLP model in spacy"""
 nlp=spacy.load("en_core_web_sm") # en_core_web_sm en_core_web_lg
 
-
 """Define a function to extract keywords"""
 def get_aspects(x):
     doc = nlp(x)
@@ -33,7 +32,7 @@ def get_aspects(x):
 list_nouns = []
 list_nouns_first = []
 
-df = pd.read_csv('data/Pantene/pantene_combined.csv', encoding='utf8')
+df = pd.read_csv('data/shavecare/shavecare_combined.csv', encoding='utf8')
 list_reviews = df["post"].tolist()
 x = 0
 for review in list_reviews:
@@ -51,6 +50,6 @@ for review in list_reviews:
     x = x + 1
 
 df["keywords"] = list_nouns
-df["keywords_first"] = list_nouns_first
+#df["keywords_first"] = list_nouns_first
 
-df.to_csv("data/Pantene/pantene_combined_keywords.csv")
+df.to_csv("data/shavecare/shavecare_combined_keywords.csv")

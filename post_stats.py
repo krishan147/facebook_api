@@ -33,7 +33,7 @@ def facebookStats(access_token, post_id):
 #encoding='windows-1252'
 credentials_file = open("credentials.txt", "r")
 access_token = credentials_file.read()
-df = pd.read_csv('data/Pantene/pantene_combined_keywords.csv', encoding="utf8")
+df = pd.read_csv('data/shavecare_combined.csv', encoding="utf8")
 list_post_id = df['post_id'].tolist()
 
 
@@ -60,4 +60,4 @@ df['likes'] = list_likes
 df['shares'] = list_shares
 df['comments'] = list_comments
 
-df.to_csv("data/Pantene/pantene_combined_keywords_stats.csv")
+df.to_csv("data/shavecare_combined_stats.csv")
