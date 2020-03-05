@@ -15,7 +15,7 @@ def facebook(handle, access_token):
 
     url = "https://graph.facebook.com/v4.0/" + handle + "?fields=posts.limit(100).until("+str(end_date)+").since("+str(start_date)+")%7Bmessage%2Ccreated_time%7D&access_token=" + access_token
     # likes, shares, comments https://graph.facebook.com/v4.0/216311481960_10154125934861961?fields=shares,likes.summary(true).limit(0),comments.summary(true).limit(0)&access_token=
-
+    #"https://graph.facebook.com/v4.0/" + handle + "?fields=posts.limit(100).until("+str(end_date)+").since("+str(start_date)+")%7Bmessage%2Ccreated_time%7D&access_token=" + access_token
     data = requests.get(url).json()
 
     if "posts" in str(data):
